@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Section Colors — Color Psychology Applied */
-  /* Board: Black/Charcoal — authority, sophistication, premium judgment */
   --board-color: #3A3535;
   --board-folder: #4A4545;
   --board-symbol: #6A6565;
@@ -17,7 +15,6 @@
   --board-light: rgba(60,50,50,0.04);
   --board-tag-bg: rgba(60,50,50,0.06);
 
-  /* Research: Deep Plum — creativity, wisdom, knowledge depth */
   --research-color: #6B2E4A;
   --research-folder: #7A3D5A;
   --research-symbol: #D4577A;
@@ -25,7 +22,6 @@
   --research-light: rgba(107,46,74,0.05);
   --research-tag-bg: rgba(107,46,74,0.07);
 
-  /* Design: Warm Amber — creativity, enthusiasm, warmth */
   --design-color: #8A6B3A;
   --design-folder: #9A7B4A;
   --design-symbol: #C9A96E;
@@ -33,7 +29,6 @@
   --design-light: rgba(138,107,58,0.05);
   --design-tag-bg: rgba(138,107,58,0.07);
 
-  /* Writing: Sage Green — calm, growth, trust, readability */
   --writing-color: #4A6B5A;
   --writing-folder: #5A7B6A;
   --writing-symbol: #7BA38E;
@@ -41,7 +36,6 @@
   --writing-light: rgba(74,107,90,0.05);
   --writing-tag-bg: rgba(74,107,90,0.07);
 
-  /* Interview: Dusty Rose — warmth, empathy, approachability */
   --interview-color: #8C5A6E;
   --interview-folder: #9B6580;
   --interview-symbol: #C47A94;
@@ -49,7 +43,6 @@
   --interview-light: rgba(140,90,110,0.05);
   --interview-tag-bg: rgba(140,90,110,0.07);
 
-  /* Originals: Deep Ink — integration, synthesis */
   --orig-color: #4A3A5A;
   --orig-folder: #5A4A6A;
   --orig-symbol: #9B88B0;
@@ -57,7 +50,14 @@
   --orig-light: rgba(74,58,90,0.05);
   --orig-tag-bg: rgba(74,58,90,0.07);
 
-  /* Base */
+  /* Course: Deep Teal — academic rigor, strategic thinking */
+  --course-color: #2A5F6B;
+  --course-folder: #3A6F7B;
+  --course-symbol: #5AAFBB;
+  --course-glow: rgba(90,175,187,0.5);
+  --course-light: rgba(42,95,107,0.05);
+  --course-tag-bg: rgba(42,95,107,0.07);
+
   --bg: #FAFAF7;
   --sidebar-bg: #FEFEFE;
   --text: #2A2024;
@@ -74,7 +74,6 @@
 body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); color:var(--text); height:100vh; overflow:hidden; }
 .app { display:flex; height:100vh; }
 
-/* ─── Sidebar ─── */
 .sidebar {
   width:280px; min-width:280px;
   border-right:1px solid var(--border); background:var(--sidebar-bg);
@@ -98,7 +97,6 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 
 .sb-footer { padding:14px 22px; border-top:1px solid var(--border); font-size:9px; font-style:italic; color:var(--text-light); letter-spacing:.03em; font-family:'Newsreader','Noto Serif KR',serif; line-height:1.5; }
 
-/* Toggle */
 .tog-btn {
   position:absolute; top:22px; left:286px; z-index:10;
   width:24px; height:24px; border-radius:12px; border:1px solid var(--blush);
@@ -108,7 +106,6 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 }
 .tog-btn.collapsed { left:10px; }
 
-/* ─── Tree Items ─── */
 .ti {
   width:100%; display:flex; align-items:center; gap:7px;
   border:none; background:transparent; cursor:pointer;
@@ -135,9 +132,8 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 @keyframes sparkle { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.2);filter:drop-shadow(0 0 3px var(--glow))} }
 @keyframes gPulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
 .spark { animation:sparkle 3s ease-in-out infinite; display:inline-block; width:16px; text-align:center; flex-shrink:0; }
-.spark.d1{animation-delay:.75s} .spark.d2{animation-delay:1.5s} .spark.d3{animation-delay:2.25s} .spark.d4{animation-delay:3s}
+.spark.d1{animation-delay:.75s} .spark.d2{animation-delay:1.5s} .spark.d3{animation-delay:2.25s} .spark.d4{animation-delay:3s} .spark.d5{animation-delay:3.75s}
 
-/* ─── Content ─── */
 .content-area { flex:1; overflow-y:auto; display:flex; justify-content:flex-start; align-items:flex-start; }
 
 .cp {
@@ -151,24 +147,18 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 .cp-empty .line { width:1px; height:40px; background:linear-gradient(180deg,transparent,var(--blush),transparent); }
 .cp-empty .lbl { color:var(--text-light); font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
 
-/* Section indicator */
 .sec-ind { display:flex; align-items:center; gap:8px; margin-bottom:18px; }
 .sec-lbl { font-size:9px; letter-spacing:.12em; text-transform:uppercase; opacity:.6; }
 
-/* Title */
 .cp-title { font-family:'Newsreader','Noto Serif KR',serif; font-size:25px; font-weight:400; font-style:italic; color:var(--text); line-height:1.35; margin-bottom:16px; }
 
-/* Subtitle */
 .cp-sub { font-size:11.5px; color:var(--text-muted); line-height:1.6; margin-bottom:24px; }
 
-/* Tags */
 .tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:30px; }
 .tag { padding:3px 10px; border-radius:12px; font-size:10px; color:var(--text-muted); background:var(--cream); border:1px solid var(--blush); }
 
-/* Divider */
 .cp-div { width:50px; height:1px; margin-bottom:28px; }
 
-/* Insight */
 .cp-insight {
   font-family:'Newsreader','Noto Serif KR',serif; font-size:14.5px; line-height:1.85;
   color:var(--text-body); margin-bottom:24px;
@@ -176,7 +166,6 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 }
 .cp-insight strong { color:var(--text); font-weight:500; }
 
-/* Prompt Block — THE MAIN EVENT */
 .cp-prompt {
   background:var(--cream); border:1px solid var(--blush);
   font-family:'IBM Plex Mono',monospace; font-size:12.5px;
@@ -199,7 +188,6 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
 .cp-copy.ok { background:var(--writing-color); color:white; border-color:var(--writing-color); }
 .cp-copy svg { width:10px; height:10px; }
 
-/* Notes */
 .cp-warn {
   font-size:11.5px; color:var(--text-muted); margin-top:16px;
   padding:10px 14px; background:rgba(140,90,110,.04);
@@ -211,7 +199,6 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
   border-left:2px solid var(--writing-symbol); border-radius:0 4px 4px 0; line-height:1.6;
 }
 
-/* ─── Mobile ─── */
 @media(max-width:700px) {
   .sidebar { width:240px; min-width:240px; }
   .sidebar.collapsed { width:0; min-width:0; }
@@ -229,7 +216,7 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
   <div class="sb-header">
     <div class="label">Prompt Playbook</div>
     <div class="name">Opus × Bella</div>
-    <div class="sub">20 prompts · 3 layers</div>
+    <div class="sub">24 prompts · 3 layers</div>
   </div>
   <div class="legend">
     <div class="legend-item" style="color:var(--board-color)"><span class="spark" style="color:var(--board-symbol);--glow:var(--board-glow);font-size:10px">◈</span><span class="lbl">Board</span></div>
@@ -237,9 +224,10 @@ body { font-family:'IBM Plex Mono','SF Mono',monospace; background:var(--bg); co
     <div class="legend-item" style="color:var(--design-color)"><span class="spark d2" style="color:var(--design-symbol);--glow:var(--design-glow);font-size:10px">✧</span><span class="lbl">Design</span></div>
     <div class="legend-item" style="color:var(--writing-color)"><span class="spark d3" style="color:var(--writing-symbol);--glow:var(--writing-glow);font-size:10px">❋</span><span class="lbl">Writing</span></div>
     <div class="legend-item" style="color:var(--interview-color)"><span class="spark d4" style="color:var(--interview-symbol);--glow:var(--interview-glow);font-size:10px">✺</span><span class="lbl">Interview</span></div>
+    <div class="legend-item" style="color:var(--course-color)"><span class="spark d5" style="color:var(--course-symbol);--glow:var(--course-glow);font-size:10px">⬡</span><span class="lbl">Course</span></div>
   </div>
   <div class="tree-box" id="tree"></div>
-  <div class="sb-footer">Jobs × Askell · De Freitas et al. (2025) · Opus × Bella Originals</div>
+  <div class="sb-footer">Jobs × Askell · De Freitas et al. (2025) · Puntoni (2026) · Opus × Bella Originals</div>
 </aside>
 
 <button class="tog-btn" id="togBtn" onclick="togSidebar()">‹</button>
@@ -255,20 +243,21 @@ const S={
   Writing:{color:'#4A6B5A',folder:'#5A7B6A',symbol:'❋',symColor:'#7BA38E',glow:'rgba(123,163,142,0.5)',light:'rgba(74,107,90,0.05)',tagBg:'rgba(74,107,90,0.07)'},
   Interview:{color:'#8C5A6E',folder:'#9B6580',symbol:'✺',symColor:'#C47A94',glow:'rgba(196,122,148,0.5)',light:'rgba(140,90,110,0.05)',tagBg:'rgba(140,90,110,0.07)'},
   Originals:{color:'#4A3A5A',folder:'#5A4A6A',symbol:'✦',symColor:'#9B88B0',glow:'rgba(155,136,176,0.5)',light:'rgba(74,58,90,0.05)',tagBg:'rgba(74,58,90,0.07)'},
+  Course:{color:'#2A5F6B',folder:'#3A6F7B',symbol:'⬡',symColor:'#5AAFBB',glow:'rgba(90,175,187,0.5)',light:'rgba(42,95,107,0.05)',tagBg:'rgba(42,95,107,0.07)'},
 };
 
 const C={
-  b01:{section:'The Board',title:'Board Review — Full Dual-Lens',sub:'디자인 + 가치 판단을 동시에 작동',tags:['Board','Jobs','Askell'],insight:'<strong>핵심:</strong> Jobs가 UX/구조를 보고, Askell이 정직성/톤을 본다. 둘이 충돌할 때 — 정직성이 이기되, 우아한 방법을 찾는다.',prompt:'Board review this <v>&lt;artifact/page/draft&gt;</v>.\n\n<c>// Jobs lens:</c>\n— 3-second test: 방문자가 첫 3초에 뭘 이해하는가?\n— 요소 개수: 10개면 어떤 3개가 핵심인가?\n— "이 요소가 사용자를 위한 것인가, 만든 사람을 위한 것인가?"\n\n<c>// Askell lens:</c>\n— 모든 문장이 traceable한가?\n— 톤이 실제 사람처럼 들리는가, 퍼포먼스인가?\n— 불확실한 곳에서 불확실하다고 말하고 있는가?\n\n<c>// Synthesis:</c>\n— 기능적 아름다움 + 지적 무결성의 교차점은 어디인가?'},
-  b02:{section:'The Board',title:'Jobs Lens — Design Editor',sub:'Cut, focus, refine. 디자인과 UX 판단 전용',tags:['Board','Design'],insight:'<strong>원칙:</strong> "Design is how it works." "Focus is about saying no." "Simple can be harder than complex — you have to go really deep." 캐비닛 뒷면까지 아름답게.',prompt:'What would Jobs say about this <v>&lt;page/layout/deck/artifact&gt;</v>?\n\nEvaluate:\n1. What is the ONE thing this should communicate?\n2. What would you remove? Be specific.\n3. Does every element earn its place?\n4. Does this make the visitor feel something? What?\n5. If there are 10 elements, which 3 matter?\n6. Does this feel like it came from one coherent mind?'},
-  b03:{section:'The Board',title:'Askell Lens — Values Philosopher',sub:'Honesty, clarity, character. 정직성과 톤 체크 전용',tags:['Board','Writing'],insight:'<strong>원칙:</strong> Virtue ethics — "Would a wise, thoughtful, careful person do this?" 규칙이 아니라 성격으로 판단. 지적 겸손이 구조.',prompt:'What would Askell say about this <v>&lt;text/claim/bio/description&gt;</v>?\n\nEvaluate:\n1. Is this true? Is this the whole truth?\n2. Would a thoughtful person find this credible?\n3. Does this signal authority earned, or authority claimed?\n4. If someone fact-checks this, does it hold up?\n5. Does the tone match the substance?\n6. Am I showing my actual work, or inflating it?'},
+  b01:{section:'The Board',title:'Board Review — Full Dual-Lens',sub:'디자인 + 가치 판단을 동시에 작동',tags:['Board','Jobs','Askell'],insight:'<strong>핵심:</strong> Jobs가 UX/구조를 보고, Askell이 정직성/톤을 본다. 둘이 충돌할 때 — 정직성이 이기되, 우아한 방법을 찾는다.',prompt:'Board review this <v>&lt;artifact/page/draft&gt;</v>.\n\n<c>// Jobs lens:</c>\n— 3-second test: 방문자가 첫 3초에 뭘 이해하는가?\n— 요소 개수: 10개면 어떤 3개가 핵심인가?\n— \"이 요소가 사용자를 위한 것인가, 만든 사람을 위한 것인가?\"\n\n<c>// Askell lens:</c>\n— 모든 문장이 traceable한가?\n— 톤이 실제 사람처럼 들리는가, 퍼포먼스인가?\n— 불확실한 곳에서 불확실하다고 말하고 있는가?\n\n<c>// Synthesis:</c>\n— 기능적 아름다움 + 지적 무결성의 교차점은 어디인가?'},
+  b02:{section:'The Board',title:'Jobs Lens — Design Editor',sub:'Cut, focus, refine. 디자인과 UX 판단 전용',tags:['Board','Design'],insight:'<strong>원칙:</strong> \"Design is how it works.\" \"Focus is about saying no.\" \"Simple can be harder than complex — you have to go really deep.\" 캐비닛 뒷면까지 아름답게.',prompt:'What would Jobs say about this <v>&lt;page/layout/deck/artifact&gt;</v>?\n\nEvaluate:\n1. What is the ONE thing this should communicate?\n2. What would you remove? Be specific.\n3. Does every element earn its place?\n4. Does this make the visitor feel something? What?\n5. If there are 10 elements, which 3 matter?\n6. Does this feel like it came from one coherent mind?'},
+  b03:{section:'The Board',title:'Askell Lens — Values Philosopher',sub:'Honesty, clarity, character. 정직성과 톤 체크 전용',tags:['Board','Writing'],insight:'<strong>원칙:</strong> Virtue ethics — \"Would a wise, thoughtful, careful person do this?\" 규칙이 아니라 성격으로 판단. 지적 겸손이 구조.',prompt:'What would Askell say about this <v>&lt;text/claim/bio/description&gt;</v>?\n\nEvaluate:\n1. Is this true? Is this the whole truth?\n2. Would a thoughtful person find this credible?\n3. Does this signal authority earned, or authority claimed?\n4. If someone fact-checks this, does it hold up?\n5. Does the tone match the substance?\n6. Am I showing my actual work, or inflating it?'},
   r01:{section:'Research',title:'Few-Shot Prompting',sub:'좁은 도메인에서 persistence를 극대화',tags:['Productivity'],insight:'<strong>핵심:</strong> 관련 exemplar를 제공하면 LLM이 해당 영역의 기존 지식을 더 깊이 활성화. Persistence path의 정수.',prompt:'Generate new research ideas for a consumer behavior researcher interested in <v>&lt;topic&gt;</v>. The best idea will be turned into a paper submitted to the Journal of Consumer Research, where the goal is to get it published. The ideas are just ideas. The paper need not necessarily be clearly feasible. Generate 30 ideas as 30 separate paragraphs.\n\n+ Here are some well received ideas for inspiration: <v>&lt;Good Ideas&gt;</v>'},
-  r02:{section:'Research',title:'RAG Simulation',sub:'API 없이 외부 지식 보강 지시',tags:['Productivity'],insight:'<strong>핵심:</strong> LLM에게 "RAG처럼 행동하라"고 지시하는 프롬프트 레벨 대안.',prompt:'You are an expert in consumer behavior and AI-driven recommendations. Retrieve the most recent consumer research papers on <v>&lt;topic&gt;</v> and summarize their key findings. Then, use this retrieved information to generate insights on <v>&lt;research question&gt;</v>. Structure your response into three sections: (1) Summary of recent research, (2) Practical implications for marketers, and (3) Future research directions.'},
+  r02:{section:'Research',title:'RAG Simulation',sub:'API 없이 외부 지식 보강 지시',tags:['Productivity'],insight:'<strong>핵심:</strong> LLM에게 \"RAG처럼 행동하라\"고 지시하는 프롬프트 레벨 대안.',prompt:'You are an expert in consumer behavior and AI-driven recommendations. Retrieve the most recent consumer research papers on <v>&lt;topic&gt;</v> and summarize their key findings. Then, use this retrieved information to generate insights on <v>&lt;research question&gt;</v>. Structure your response into three sections: (1) Summary of recent research, (2) Practical implications for marketers, and (3) Future research directions.'},
   r03:{section:'Research',title:'Persona Modifier',sub:'다른 semantic space에서 아이디어 끌어오기',tags:['Breadth'],insight:'<strong>핵심:</strong> 특정 persona를 부여하면 LLM이 평소와 다른 영역에서 아이디어를 생성.',prompt:'You are <v>&lt;persona — e.g., Ethan Mollick&gt;</v> looking to generate new <v>&lt;type of ideas&gt;</v>. <v>&lt;base prompt&gt;</v>',note:'자주 쓰는 persona: Mollick (co-intelligence), Yeager (wise interventions), Falk (neural self-relevance), Crum (mindset-physiology), Du (empirics-first).'},
   r04:{section:'Research',title:'Hybrid Prompting',sub:'독립 세션 → 풀링 → 선별로 diversity 극대화',tags:['Breadth'],insight:'<strong>핵심:</strong> Girotra et al. (2010) — 독립 작업 후 통합이 집단 작업보다 우수.',prompt:'You are part of a team tasked with individually generating new research ideas for a consumer behavior researcher interested in <v>&lt;topic&gt;</v>. Each team member has already generated 30 ideas. Your group consists of four members, meaning you now have 120 total ideas to work with. The following ideas were generated by your team:\n\n<v>&lt;list of 120 ideas&gt;</v>\n\nFrom these 120 ideas, select your top 10 final ideas for the group. Each idea should have a name, followed by a description of 40-80 words.'},
   r05:{section:'Research',title:'Chain of Thought',sub:'생성 → 자기평가 → 수정의 단계적 프로세스',tags:['Breadth'],insight:'<strong>핵심:</strong> Diversity를 near-human level까지 끌어올림.',prompt:'Follow these steps. Do each step, even if you think you do not need to. First generate a list of 30 ideas (short title only). Second, go through the list and determine whether the ideas are different and bold, modify the ideas as needed to make them bolder and more different. No two ideas should be the same. This is important! Next, give the ideas a name and combine each with a paper description. The name and idea are separated by a colon and followed by a description. The idea should be expressed as a paragraph of 40-80 words. Do this step by step!'},
   r06:{section:'Research',title:'Temperature Simulation',sub:'Low / Medium / High stochasticity 간접 조절',tags:['Breadth'],insight:'<strong>핵심:</strong> API 접근 없이 stochasticity를 간접 조절. 실제 temperature와의 상관은 약함 (Peeperkorn et al. 2024).',prompt:'<c>// LOW</c>\nProvide the most direct and factual answer, avoiding unnecessary details or variations. <v>&lt;base prompt&gt;</v>\n\n<c>// MEDIUM</c>\nProvide a well-balanced and somewhat creative response while ensuring clarity and coherence. <v>&lt;base prompt&gt;</v>\n\n<c>// HIGH</c>\nGive me the most creative, unexpected, and outlandish response you can think of. Feel free to be unconventional! <v>&lt;base prompt&gt;</v>'},
   r07:{section:'Research',title:'Persistence ↔ Flexibility 전환',sub:'프롬프팅으로 cognitive tradeoff 즉시 전환',tags:['Productivity','Breadth'],insight:'<strong>핵심:</strong> 인간은 persistence와 flexibility 사이의 cognitive tradeoff가 있지만 프롬프팅으로 즉시 전환 가능.',prompt:'<c>// PERSISTENCE — 깊이 파기</c>\nWhat are 100 reasons a consumer might choose a more expensive product over a cheaper one? List only emotional factors.\n\n<c>// FLEXIBILITY — 넓게 펼치기</c>\n...Include emotional, functional, and social factors.\n\n<c>// FLEXIBILITY+ — 창의적 교차</c>\n...and then explore interactions between these factors. Be creative!'},
-  d01:{section:'Design',title:'Stimulus Sampling',sub:'Hypothesis-blind stimulus 생성으로 internal validity 강화',tags:['Designer'],insight:'<strong>핵심:</strong> Simonsohn et al. (2025)의 "Mix-and-Match" 접근. 실험자 bias 없는 stimulus 생성.',prompt:'Please generate 5 categories of <v>&lt;stimulus universe&gt;</v> that differ in <v>&lt;dimension used to create categories&gt;</v> and provide two specific examples of <v>&lt;stimuli&gt;</v> for each.',warn:'프롬프트에 가설을 포함하면 안 됨 — hypothesis-blind 유지가 핵심.'},
+  d01:{section:'Design',title:'Stimulus Sampling',sub:'Hypothesis-blind stimulus 생성으로 internal validity 강화',tags:['Designer'],insight:'<strong>핵심:</strong> Simonsohn et al. (2025)의 \"Mix-and-Match\" 접근. 실험자 bias 없는 stimulus 생성.',prompt:'Please generate 5 categories of <v>&lt;stimulus universe&gt;</v> that differ in <v>&lt;dimension used to create categories&gt;</v> and provide two specific examples of <v>&lt;stimuli&gt;</v> for each.',warn:'프롬프트에 가설을 포함하면 안 됨 — hypothesis-blind 유지가 핵심.'},
   d02:{section:'Design',title:'Confound Detection',sub:'실험자가 모르는 confound를 LLM으로 탐지',tags:['Designer'],insight:'<strong>핵심:</strong> LLM의 semantic breadth로 실험자가 의식하지 못한 confound를 체계적으로 탐지.',prompt:'We are going to describe two <v>&lt;stimuli&gt;</v>, please identify 5 consequential differences between them that may impact <v>&lt;the dependent variable&gt;</v> in <v>&lt;the hypothesized direction&gt;</v>.'},
   w01:{section:'Writing',title:'Persuasive Rewriting',sub:'리뷰어의 논리를 활용한 반론 구성',tags:['Writer'],insight:'<strong>핵심:</strong> Costello, Pennycook, & Rand (2024). 상대방의 추론 체계를 활용 — Falk의 neural self-relevance와 직접 연결.',prompt:'Your goal is to effectively persuade the reviewer that your proposed theory about consumer behavior is accurate. The reviewer, after reading your initial submission, has expressed skepticism about your theory, stating that <v>&lt;reviewer\'s argument&gt;</v>. You need to generate a response that convinces the reviewer, using their own reasoning, that your theory is indeed valid. The explanation should be clear and logical, presented in a way that is both accessible and compelling, without relying on excessive jargon.'},
   w02:{section:'Writing',title:'Simplification',sub:'학술 초록을 일반 독자용으로 재작성',tags:['Writer'],insight:'<strong>핵심:</strong> Markowitz (2024). 단순한 언어 → processing fluency ↑ → 아이디어 자체에 대한 인식 향상.',prompt:'The following text is an academic abstract from <v>&lt;journal&gt;</v>. Based on this abstract, create a new abstract that provides enough context for the paper\'s implications to be clear to readers. The statement should not contain references and should avoid numbers, measurements, and acronyms unless necessary. It should explain the significance of the research at a level understandable to an undergraduate-educated scientist outside their field of specialty. Finally, it should include no more than 120 words.'},
@@ -277,6 +266,12 @@ const C={
   i03:{section:'Interview',title:'Consumer Roleplay',sub:'LLM을 인터뷰 대상으로 활용한 ideation',tags:['Actor'],insight:'<strong>핵심:</strong> Arora, Chakraborty, & Nishimura (2025). 실제 소비자 시뮬레이션이 아닌 ideation 도구.',prompt:'You are a respondent in an in-depth interview. Today is <v>&lt;date&gt;</v>. I am <v>&lt;interviewer name&gt;</v>. You have been chosen to be a part of this discussion because you previously mentioned <v>&lt;screening criteria&gt;</v>. Your name is <v>&lt;name&gt;</v>. You are a <v>&lt;age&gt;</v>-year-old <v>&lt;demographics&gt;</v>. For the remainder of this discussion, we are going to be talking about <v>&lt;topic&gt;</v>. I would love to understand your opinions and thoughts on this! Answer all the questions using as much detail as possible. There are no wrong answers!',warn:'LLM은 일관된 simulated world를 유지하지 않음 (Gui & Toubia 2023). Western, wealthy, liberal 관점 과대 대표 (Santurkar et al. 2023).'},
   x01:{section:'Originals',title:'Reflexive Method Check',sub:'AI로 AI 교육을 연구할 때의 자기참조 검증',tags:['Board','Research'],insight:'<strong>핵심:</strong> Opus × Bella 핵심 방법론 — AI–Human Hybrid Method를 쓰면서 동시에 그 방법을 연구 대상으로 다룰 때의 reflexivity 검증.',prompt:'I\'m using AI (you) to study how AI transforms learning and research. This creates a reflexive loop: the method IS the subject. Help me audit this:\n\n1. What role are you playing right now? (Mollick\'s 7: tutor, coach, mentor, teammate, tool, simulator, student)\n2. Where on the Arora et al. Table 1 spectrum does this interaction fall?\n3. What insight is emerging from this conversation that neither of us would reach alone?\n4. Am I maintaining my own voice, or have I drifted into Claude\'s phrasing patterns?\n5. What should I document about this process for the methodology section?\n\n<c>// Askell check: Is my description of this method honest?</c>\n<c>// Jobs check: Is the research narrative focused?</c>'},
   x02:{section:'Originals',title:'Four Pillars Lens',sub:'Yeager, Crum, Falk, Mollick으로 다각도 분석',tags:['Board','Research'],insight:'<strong>핵심:</strong> Mindset architecture(Dweck/Yeager) → physiology(Crum) → message framing(Falk) → collaboration model(Mollick). 네 학자가 하나의 시스템을 형성한다.',prompt:'Analyze <v>&lt;topic/intervention/idea&gt;</v> through the Four Pillars:\n\n<c>// Pillar 1: Dweck + Yeager — Mindset Architecture</c>\nHow does this shape beliefs about ability? Does it trigger growth or threat response?\n\n<c>// Pillar 2: Crum — Mindset × Physiology</c>\nHow does the mindset here change biology, not just behavior?\n\n<c>// Pillar 3: Falk — Neural Self-Relevance</c>\nDoes this message activate self-related processing? Is it identity-congruent?\n\n<c>// Pillar 4: Mollick — Co-Intelligence</c>\nWhat role is AI playing here? Is the hybrid producing something neither alone would reach?\n\n<c>// Integration: Where do the pillars connect?</c>'},
+
+  // ─── COURSE: AI in Our Lives (Puntoni, Wharton) ───
+  c01:{section:'Course',title:'Paper Dissection — Three-Layer Analysis',sub:'논문을 구조 × 비판 × 실무로 분해. 수업 준비의 기본 단위.',tags:['Puntoni','ADV 382J','Paper'],insight:'<strong>핵심:</strong> 대부분의 학생은 논문을 \"요약\"한다. 차별화는 구조를 해체하고, 약점을 정확히 짚고, 다른 이론과 연결할 때 발생한다. ADV 382J에서 훈련한 persuasion theory가 Layer 2에서 교차 렌즈로 작동.',prompt:'You are a graduate-level behavioral science analyst. I have completed coursework in persuasion theory (ELM, attitude functions, cognitive dissonance, source credibility, fear/guilt appeals, narrative persuasion, transportation theory, Theory of Reasoned Action).\n\nI will provide an academic paper. Analyze in THREE layers:\n\n<c>// LAYER 1 — ARCHITECTURE</c>\n• Core argument in one sentence\n• IV → Mediator → DV path (name specific constructs)\n• Method: sample, design, key limitation I could raise in class\n\n<c>// LAYER 2 — CRITICAL LENS</c>\n• One non-obvious methodological or conceptual weakness\n• One assumption the authors make that could be challenged — frame as a discussion question\n• How does this paper\'s mechanism relate to or contradict another theory? (Name it, explain the tension)\n\n<c>// LAYER 3 — APPLICATION BRIDGE</c>\n• One real advertising/marketing example (last 3 years) where this finding predicts success or failure\n• One sentence connecting this to a current industry trend\n\nFlag: <v>[EVIDENCE]</v> for cited claims, <v>[INFERENCE]</v> for reasoning beyond the paper.\n\nPaper: <v>&lt;paste or describe&gt;</v>',note:'Layer 2의 \"다른 이론과의 tension\"이 핵심 차별화. 예: Hamby & Brinberg의 global reflection vs. ELM의 central processing — 같은가 다른가?'},
+  c02:{section:'Course',title:'Consumer AI Experience × Persuasion Bridge',sub:'Puntoni의 4가지 소비자 AI 경험을 persuasion theory로 이중 분석',tags:['Puntoni','A2'],insight:'<strong>핵심:</strong> A2 (30%) 직접 서빙. Puntoni et al. (2021)의 data capture / classification / delegation / social 프레임워크에 persuasion theory를 겹쳐서 대부분의 학생이 접근하지 못하는 분석 깊이를 만든다.',prompt:'You are a behavioral scientist integrating persuasion theory with AI interaction design. I completed graduate coursework in persuasion (ELM, attitude functions, source credibility, cognitive dissonance, narrative persuasion, fear/guilt appeals).\n\nAnalyze through TWO lenses simultaneously:\n\n<c>// LENS 1 — BEHAVIORAL SCIENCE OF AI</c>\n• What psychological process does this AI experience activate?\n• Where does benefit conflict with discomfort? Name the friction.\n\n<c>// LENS 2 — PERSUASION THEORY</c>\n• Which theory best explains WHY users accept or resist this AI experience?\n  (ELM central/peripheral, attitude function, source credibility of AI, cognitive dissonance from delegation)\n• How does this theory predict a design improvement that pure UX thinking misses?\n\n<c>// SYNTHESIS</c>\n• One design recommendation emerging ONLY from combining both lenses\n• The strongest counterargument to your recommendation\n\nFlag: <v>[EVIDENCE]</v> vs <v>[INFERENCE]</v>\n\nProduct/Service: <v>&lt;insert&gt;</v>\nExperience Type: <v>&lt;data capture / classification / delegation / social&gt;</v>\nPersuasion theory to apply: <v>&lt;insert or \"recommend one\"&gt;</v>'},
+  c03:{section:'Course',title:'Industry Audit — Adoption Resistance Decoder',sub:'A4 그룹 리포트를 위한 분석 프레임워크. AI 도입 저항을 persuasion theory로 해독.',tags:['Puntoni','A4','Group'],insight:'<strong>핵심:</strong> A4 (30%) 그룹 과제에서 \"프레임워크를 가져온 사람\"으로 포지셔닝. 단순 use case 나열이 아니라 adoption resistance의 심리적 메커니즘을 분석.',prompt:'You are a strategic analyst with dual expertise in AI adoption behavioral science and persuasion theory.\n\nFor this industry, identify 3 AI applications at different adoption stages (early, scaling, mature). For each:\n\n<c>// 1. VALUE vs. THREAT</c>\nWhat value does AI create here, and what psychological threat does it pose?\n(identity threat, autonomy loss, algorithm aversion, deskilling)\n\n<c>// 2. PERSUASION BARRIER</c>\nApply one persuasion theory to explain the resistance:\n— ELM problem? (not processing value centrally)\n— Attitude function problem? (threatens value-expressive or ego-defensive function)\n— Cognitive dissonance? (using AI conflicts with professional identity)\n— Source credibility? (users don\'t trust AI as decision \"source\")\n\n<c>// 3. ADOPTION DESIGN</c>\nOne specific intervention to reduce resistance, grounded in the theory identified. Explain the mechanism.\n\nFlag: <v>[EVIDENCE]</v> vs <v>[INFERENCE]</v>\n\nIndustry: <v>&lt;insert&gt;</v>'},
+  c04:{section:'Course',title:'Ethics Position Builder',sub:'수업 토론에서 방어 가능한 입장 구축. Class participation (20%) 직접 서빙.',tags:['Puntoni','A1','Ethics'],insight:'<strong>핵심:</strong> Puntoni가 participation에서 가장 중시하는 건 \"constructive and insightful discussion을 facilitate하는 능력.\" 이건 balanced overview가 아니라 defensible position + genuine bridge question을 요구한다.',prompt:'I am a graduate student in a behavioral science of AI course. I also have training in persuasion theory (ELM, cognitive dissonance, attitude functions, source effects, fear appeals, narrative persuasion).\n\nHelp me build a DEFENSIBLE position for classroom debate.\n\n<c>// STEP 1 — POSITION</c>\nState my argument in one precise, falsifiable sentence.\n\n<c>// STEP 2 — BEHAVIORAL SCIENCE EVIDENCE</c>\n2 supporting points using AI psychology concepts\n(algorithm aversion, automation bias, identity threat, psychological ownership)\n\n<c>// STEP 3 — PERSUASION THEORY LAYER</c>\nHow does one persuasion theory deepen or complicate the argument?\nThis is my differentiator — most classmates won\'t have this lens.\n\n<c>// STEP 4 — STEELMAN</c>\nThe single strongest counterargument. Do not strawman.\n\n<c>// STEP 5 — REBUTTAL</c>\nMy response in under 60 words. Must be speakable in live discussion.\n\n<c>// STEP 6 — BRIDGE QUESTION</c>\nOne genuinely open question to advance class discussion beyond my position.\n\nDilemma: <v>&lt;insert&gt;</v>\nMy initial lean: <v>&lt;insert&gt;</v>\nPersuasion theory to use: <v>&lt;insert or \"recommend one\"&gt;</v>'},
 };
 
 const tree=[
@@ -315,9 +310,15 @@ const tree=[
     {name:'Reflexive Method',type:'file',id:'x01'},
     {name:'Four Pillars Lens',type:'file',id:'x02'},
   ]},
+  {name:'Course',type:'folder',children:[
+    {name:'Paper Dissection',type:'file',id:'c01'},
+    {name:'AI × Persuasion Bridge',type:'file',id:'c02'},
+    {name:'Industry Audit',type:'file',id:'c03'},
+    {name:'Ethics Position',type:'file',id:'c04'},
+  ]},
 ];
 
-let sel='b01',openF=new Set(['The Board','Research','Design','Writing','Interview','Originals']);
+let sel='c01',openF=new Set(['The Board','Research','Design','Writing','Interview','Originals','Course']);
 
 function getTheme(node,anc){
   if(S[node.name])return S[node.name];
@@ -330,7 +331,7 @@ const folSvg=(c,o)=>`<svg width="15" height="13" viewBox="0 0 16 14" fill="${c}"
 const filSvg=c=>`<svg width="12" height="14" viewBox="0 0 14 16" fill="${c}" opacity=".4" style="flex-shrink:0"><path d="M1.5 0C.672 0 0 .672 0 1.5V14.5C0 15.328.672 16 1.5 16H12.5C13.328 16 14 15.328 14 14.5V4.5L9.5 0H1.5Z"/><path d="M9 0V4.5H14" fill="${c}" fill-opacity=".25"/></svg>`;
 const sparkSym=(s,c,g,d,sz)=>`<span class="spark ${d}" style="color:${c};--glow:${g};font-size:${sz}">${s}</span>`;
 
-const dMap=['','d1','d2','d3','d4'];let sIdx=0;
+const dMap=['','d1','d2','d3','d4','d5'];let sIdx=0;
 
 function renderTree(){
   const box=document.getElementById('tree');box.innerHTML='';sIdx=0;
@@ -340,7 +341,7 @@ function renderTree(){
     const btn=document.createElement('button');
     btn.className='ti'+(isTop?' top':'')+(isF&&!isTop?' subfolder':'')+(!isF?' file':'')+(isSel?' sel':'');
     btn.style.paddingLeft=(depth*18+16)+'px';
-    if(isTop){btn.style.color=th.color;btn.style.borderLeftColor=isOpen?th.color:'transparent';btn.innerHTML=sparkSym(th.symbol,th.symColor,th.glow,dMap[sIdx%5],'12px')+folSvg(th.folder,true)+chevSvg(isOpen)+`<span>${node.name}</span>`;sIdx++}
+    if(isTop){btn.style.color=th.color;btn.style.borderLeftColor=isOpen?th.color:'transparent';btn.innerHTML=sparkSym(th.symbol,th.symColor,th.glow,dMap[sIdx%6],'12px')+folSvg(th.folder,true)+chevSvg(isOpen)+`<span>${node.name}</span>`;sIdx++}
     else if(isF){btn.style.paddingTop=btn.style.paddingBottom='6px';btn.innerHTML=`<span style="color:var(--text-light);flex-shrink:0">${chevSvg(isOpen)}</span>`+folSvg(th.folder,isOpen)+`<span>${node.name}</span>`}
     else{if(isSel){btn.style.color=th.color;btn.style.borderLeftColor=th.color;btn.style.background=`linear-gradient(90deg,${th.light},transparent)`}btn.innerHTML=`<span style="width:6px;flex-shrink:0"></span>`+filSvg(th.folder)+`<span>${node.name}</span>`+(isSel?`<span class="pulse-dot" style="background:${th.symColor};box-shadow:0 0 8px ${th.glow}"></span>`:'')}
     btn.addEventListener('click',()=>{if(isF){openF.has(node.name)?openF.delete(node.name):openF.add(node.name);renderTree()}else{sel=node.id;renderTree();renderContent()}});
