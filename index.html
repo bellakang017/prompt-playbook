@@ -233,6 +233,138 @@ body {
   line-height: 1.5;
 }
 
+/* ── Prompt Cards ── */
+.prompt-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-top: 1.6rem;
+  box-shadow: 0 1px 4px rgba(45,55,72,.04), 0 4px 16px rgba(45,55,72,.03);
+  max-width: 600px;
+}
+.prompt-card[data-accent="lavender"] { border: 1.5px solid rgba(196,181,224,.12); }
+.prompt-card[data-accent="mint"] { border: 1.5px solid rgba(168,216,203,.12); }
+.prompt-card[data-accent="peach"] { border: 1.5px solid rgba(245,197,184,.12); }
+.prompt-card[data-accent="soft-blue"] { border: 1.5px solid rgba(181,205,224,.12); }
+
+.card-label {
+  font-family: var(--sm);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.card-label[data-c="lavender"] { color: var(--lavender); }
+.card-label[data-c="mint"] { color: var(--mint); }
+.card-label[data-c="peach"] { color: var(--peach); }
+.card-label[data-c="soft-blue"] { color: var(--soft-blue); }
+
+.card-title {
+  font-family: var(--sf);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--txt);
+  margin-bottom: .25rem;
+}
+
+.card-subtitle {
+  font-family: var(--st);
+  font-size: .92rem;
+  color: var(--txt3);
+  margin-bottom: 1rem;
+}
+
+.card-divider {
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.card-divider[data-c="lavender"] { background: var(--lavender); }
+.card-divider[data-c="mint"] { background: var(--mint); }
+.card-divider[data-c="peach"] { background: var(--peach); }
+.card-divider[data-c="soft-blue"] { background: var(--soft-blue); }
+
+.view-prompt-btn {
+  font-family: var(--sm);
+  font-size: .8rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .3rem 0;
+  transition: color .25s;
+}
+.view-prompt-btn[data-c="lavender"] { color: var(--lavender); }
+.view-prompt-btn[data-c="mint"] { color: var(--mint); }
+.view-prompt-btn[data-c="peach"] { color: var(--peach); }
+.view-prompt-btn[data-c="soft-blue"] { color: var(--soft-blue); }
+.view-prompt-btn:hover { opacity: .75; }
+
+.card-expand {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s var(--eo);
+}
+
+.prompt-steps {
+  padding-top: 1rem;
+}
+
+.prompt-step {
+  display: flex;
+  gap: .85rem;
+  align-items: flex-start;
+  padding: .7rem 0;
+}
+.prompt-step + .prompt-step {
+  border-top: 1px solid var(--bdr);
+}
+
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sm);
+  font-size: .7rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-num[data-c="lavender"] { background: var(--lavender); }
+.step-num[data-c="mint"] { background: var(--mint); }
+.step-num[data-c="peach"] { background: var(--peach); }
+.step-num[data-c="soft-blue"] { background: var(--soft-blue); }
+
+.step-text {
+  font-family: var(--st);
+  font-size: .95rem;
+  color: var(--txt2);
+  line-height: 1.75;
+}
+
+.copy-btn {
+  font-family: var(--sm);
+  font-size: .75rem;
+  font-weight: 500;
+  padding: .4rem 1rem;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all .25s;
+}
+.copy-btn[data-c="lavender"] { border: 1.5px solid var(--lavender); color: var(--lavender); }
+.copy-btn[data-c="mint"] { border: 1.5px solid var(--mint); color: var(--mint); }
+.copy-btn[data-c="peach"] { border: 1.5px solid var(--peach); color: var(--peach); }
+.copy-btn[data-c="soft-blue"] { border: 1.5px solid var(--soft-blue); color: var(--soft-blue); }
+.copy-btn:hover { opacity: .7; }
+
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .dash { grid-template-columns: 1fr !important; }
@@ -305,23 +437,111 @@ body {
   <div class="main">
 
     <div id="p-explore" class="panel" style="display:block">
-      <h2 class="panel-title si s2">Explore</h2>
-      <p class="panel-sub si s3">Browse the full prompt collection.</p>
+      <div class="prompt-card si s2" data-accent="lavender">
+        <div class="card-label" data-c="lavender">EXPLORE</div>
+        <h2 class="card-title">Explore</h2>
+        <p class="card-subtitle">브레인스토밍, 방향 탐색, 아이디어 발산</p>
+        <div class="card-divider" data-c="lavender"></div>
+        <button class="view-prompt-btn" data-c="lavender" onclick="toggleCard('explore')">View Prompt &darr;</button>
+        <div class="card-expand" id="card-explore">
+          <div class="prompt-steps" id="prompt-explore">
+            <div class="prompt-step">
+              <span class="step-num" data-c="lavender">1</span>
+              <span class="step-text">내 요청의 맥락과 목적을 먼저 파악해</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="lavender">2</span>
+              <span class="step-text">제약 없이 가능한 방향들을 넓게 펼쳐줘</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="lavender">3</span>
+              <span class="step-text">각 방향의 핵심을 한 줄로 정리하고, 가장 유망한 2-3개를 추천해줘</span>
+            </div>
+          </div>
+          <button class="copy-btn" data-c="lavender" id="copy-explore" onclick="copyPrompt('explore')">Copy</button>
+        </div>
+      </div>
     </div>
 
     <div id="p-research" class="panel" style="display:none">
-      <h2 class="panel-title">Research</h2>
-      <p class="panel-sub">Prompts for academic research workflows.</p>
+      <div class="prompt-card si s2" data-accent="mint">
+        <div class="card-label" data-c="mint">RESEARCH</div>
+        <h2 class="card-title">Research</h2>
+        <p class="card-subtitle">논문/개념 분석 + 정보 구조화</p>
+        <div class="card-divider" data-c="mint"></div>
+        <button class="view-prompt-btn" data-c="mint" onclick="toggleCard('research')">View Prompt &darr;</button>
+        <div class="card-expand" id="card-research">
+          <div class="prompt-steps" id="prompt-research">
+            <div class="prompt-step">
+              <span class="step-num" data-c="mint">1</span>
+              <span class="step-text">내가 찾고 있는 정보의 목적과 맥락을 파악해</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="mint">2</span>
+              <span class="step-text">핵심 개념/논문/근거를 분석해줘</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="mint">3</span>
+              <span class="step-text">위계가 명확한 구조로 정리해줘 (헤딩 → 요약 → 세부)</span>
+            </div>
+          </div>
+          <button class="copy-btn" data-c="mint" id="copy-research" onclick="copyPrompt('research')">Copy</button>
+        </div>
+      </div>
     </div>
 
     <div id="p-write" class="panel" style="display:none">
-      <h2 class="panel-title">Write</h2>
-      <p class="panel-sub">Prompts for writing and revision.</p>
+      <div class="prompt-card si s2" data-accent="peach">
+        <div class="card-label" data-c="peach">WRITE</div>
+        <h2 class="card-title">Write</h2>
+        <p class="card-subtitle">문맥별 글쓰기 + 리뷰/편집</p>
+        <div class="card-divider" data-c="peach"></div>
+        <button class="view-prompt-btn" data-c="peach" onclick="toggleCard('write')">View Prompt &darr;</button>
+        <div class="card-expand" id="card-write">
+          <div class="prompt-steps" id="prompt-write">
+            <div class="prompt-step">
+              <span class="step-num" data-c="peach">1</span>
+              <span class="step-text">대상, 문맥, 톤을 파악해 (논문/이메일/카피/일상 등)</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="peach">2</span>
+              <span class="step-text">해당 문맥에 맞는 톤과 구조로 작성해줘</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="peach">3</span>
+              <span class="step-text">명확성, 의도 정합성, 흐름을 자체 점검하고 수정 제안을 같이 줘</span>
+            </div>
+          </div>
+          <button class="copy-btn" data-c="peach" id="copy-write" onclick="copyPrompt('write')">Copy</button>
+        </div>
+      </div>
     </div>
 
     <div id="p-design" class="panel" style="display:none">
-      <h2 class="panel-title">Design</h2>
-      <p class="panel-sub">Prompts for design and visual thinking.</p>
+      <div class="prompt-card si s2" data-accent="soft-blue">
+        <div class="card-label" data-c="soft-blue">DESIGN</div>
+        <h2 class="card-title">Design</h2>
+        <p class="card-subtitle">UX/UI, 워크샵 자료 제작</p>
+        <div class="card-divider" data-c="soft-blue"></div>
+        <button class="view-prompt-btn" data-c="soft-blue" onclick="toggleCard('design')">View Prompt &darr;</button>
+        <div class="card-expand" id="card-design">
+          <div class="prompt-steps" id="prompt-design">
+            <div class="prompt-step">
+              <span class="step-num" data-c="soft-blue">1</span>
+              <span class="step-text">이 디자인의 사용자와 목적을 파악해</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="soft-blue">2</span>
+              <span class="step-text">포커스와 클래리티 중심으로 제작해줘</span>
+            </div>
+            <div class="prompt-step">
+              <span class="step-num" data-c="soft-blue">3</span>
+              <span class="step-text">사용자 관점에서 "이게 바로 이해되는가" 체크리스트로 점검해줘</span>
+            </div>
+          </div>
+          <button class="copy-btn" data-c="soft-blue" id="copy-design" onclick="copyPrompt('design')">Copy</button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -335,6 +555,20 @@ function go(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
   const p = document.getElementById('p-' + id);
   p.style.display = 'block';
+}
+
+function toggleCard(id) {
+  const el = document.getElementById('card-' + id);
+  const isOpen = el.style.maxHeight && el.style.maxHeight !== '0px';
+  el.style.maxHeight = isOpen ? '0px' : el.scrollHeight + 'px';
+}
+
+function copyPrompt(id) {
+  const text = document.getElementById('prompt-' + id).innerText;
+  navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copy-' + id);
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 2000);
 }
 
 document.addEventListener('keydown', e => {
