@@ -106,6 +106,8 @@ body {
 .nav-btn:hover {
   color: var(--txt2);
   background: rgba(45,55,72,.03);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
 }
 
 .nav-btn .nav-icon {
@@ -295,17 +297,58 @@ body {
   cursor: pointer;
   padding: .3rem 0;
   transition: color .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
 }
 .view-prompt-btn[data-c="lavender"] { color: var(--lavender); }
 .view-prompt-btn[data-c="mint"] { color: var(--mint); }
 .view-prompt-btn[data-c="peach"] { color: var(--peach); }
 .view-prompt-btn[data-c="soft-blue"] { color: var(--soft-blue); }
+.view-prompt-btn .chevron {
+  display: inline-block;
+  transition: transform .3s var(--eo);
+  font-size: .7rem;
+}
+.view-prompt-btn.expanded .chevron {
+  transform: rotate(180deg);
+}
 .view-prompt-btn:hover { opacity: .75; }
 
 .card-expand {
   max-height: 0;
   overflow: hidden;
   transition: max-height .4s var(--eo);
+}
+.card-expand .prompt-steps,
+.card-expand .copy-btn {
+  opacity: 0;
+  transition: opacity .3s ease .1s;
+}
+.card-expand.open .prompt-steps,
+.card-expand.open .copy-btn {
+  opacity: 1;
+}
+
+/* Panel switch animation */
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.panel.animate-in {
+  animation: panelIn .4s var(--eo) forwards;
+}
+
+/* Copy button feedback */
+@keyframes copyFlash {
+  0% { background: transparent; }
+  20% { background: rgba(72,187,120,.12); }
+  100% { background: transparent; }
+}
+.copy-btn.copied {
+  animation: copyFlash .6s ease;
+  border-color: #48BB78 !important;
+  color: #48BB78 !important;
 }
 
 .prompt-steps {
@@ -442,7 +485,7 @@ body {
         <h2 class="card-title">Explore</h2>
         <p class="card-subtitle">브레인스토밍, 방향 탐색, 아이디어 발산</p>
         <div class="card-divider" data-c="lavender"></div>
-        <button class="view-prompt-btn" data-c="lavender" onclick="toggleCard('explore')">View Prompt &darr;</button>
+        <button class="view-prompt-btn" data-c="lavender" onclick="toggleCard('explore')">View Prompt <span class="chevron">&#9660;</span></button>
         <div class="card-expand" id="card-explore">
           <div class="prompt-steps" id="prompt-explore">
             <div class="prompt-step">
@@ -469,7 +512,7 @@ body {
         <h2 class="card-title">Research</h2>
         <p class="card-subtitle">논문/개념 분석 + 정보 구조화</p>
         <div class="card-divider" data-c="mint"></div>
-        <button class="view-prompt-btn" data-c="mint" onclick="toggleCard('research')">View Prompt &darr;</button>
+        <button class="view-prompt-btn" data-c="mint" onclick="toggleCard('research')">View Prompt <span class="chevron">&#9660;</span></button>
         <div class="card-expand" id="card-research">
           <div class="prompt-steps" id="prompt-research">
             <div class="prompt-step">
@@ -496,7 +539,7 @@ body {
         <h2 class="card-title">Write</h2>
         <p class="card-subtitle">문맥별 글쓰기 + 리뷰/편집</p>
         <div class="card-divider" data-c="peach"></div>
-        <button class="view-prompt-btn" data-c="peach" onclick="toggleCard('write')">View Prompt &darr;</button>
+        <button class="view-prompt-btn" data-c="peach" onclick="toggleCard('write')">View Prompt <span class="chevron">&#9660;</span></button>
         <div class="card-expand" id="card-write">
           <div class="prompt-steps" id="prompt-write">
             <div class="prompt-step">
@@ -523,7 +566,7 @@ body {
         <h2 class="card-title">Design</h2>
         <p class="card-subtitle">UX/UI, 워크샵 자료 제작</p>
         <div class="card-divider" data-c="soft-blue"></div>
-        <button class="view-prompt-btn" data-c="soft-blue" onclick="toggleCard('design')">View Prompt &darr;</button>
+        <button class="view-prompt-btn" data-c="soft-blue" onclick="toggleCard('design')">View Prompt <span class="chevron">&#9660;</span></button>
         <div class="card-expand" id="card-design">
           <div class="prompt-steps" id="prompt-design">
             <div class="prompt-step">
@@ -552,23 +595,44 @@ body {
 function go(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
-  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.panel').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('animate-in');
+  });
   const p = document.getElementById('p-' + id);
   p.style.display = 'block';
+  // Trigger reflow then animate
+  void p.offsetWidth;
+  p.classList.add('animate-in');
 }
 
 function toggleCard(id) {
   const el = document.getElementById('card-' + id);
   const isOpen = el.style.maxHeight && el.style.maxHeight !== '0px';
   el.style.maxHeight = isOpen ? '0px' : el.scrollHeight + 'px';
+  // Toggle chevron rotation and content fade
+  const viewBtn = el.previousElementSibling;
+  if (isOpen) {
+    el.classList.remove('open');
+    viewBtn.classList.remove('expanded');
+  } else {
+    el.classList.add('open');
+    viewBtn.classList.add('expanded');
+  }
 }
 
 function copyPrompt(id) {
   const text = document.getElementById('prompt-' + id).innerText;
   navigator.clipboard.writeText(text);
   const btn = document.getElementById('copy-' + id);
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Copy', 2000);
+  btn.classList.remove('copied');
+  void btn.offsetWidth;
+  btn.classList.add('copied');
+  btn.textContent = 'Copied \u2713';
+  setTimeout(() => {
+    btn.textContent = 'Copy';
+    btn.classList.remove('copied');
+  }, 2000);
 }
 
 document.addEventListener('keydown', e => {
